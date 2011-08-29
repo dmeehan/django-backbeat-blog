@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-import images
+import blog
 import os
 
 try:
@@ -13,14 +13,14 @@ except (IOError, OSError):
     reqs = ''
 
 setup(
-    name='django-backbeat-images',
+    name='django-backbeat-blog',
     version=images.get_version(),
-    description='A pluggable image management app.',
+    description='A pluggable blog app.',
     long_description=long_description,
     author='Douglas Meehan',
     author_email='dmeehan@gmail.com',
     include_package_data=True,
-    url='http://github.com/dmeehan/django-backbeat-projects',
+    url='http://github.com/dmeehan/django-backbeat-blog',
     packages=find_packages(),
     classifiers=[
         'Framework :: Django',
