@@ -1,0 +1,16 @@
+# This file collects all required third-party applications that are
+# needed to run this project. Later you can install all these apps
+# in a row using pip.
+#  Example::
+#
+#     pip install -r requirements.txt
+
+# django apps
+django==1.3
+south==0.7.3
+django-taggit
+django-categories
+
+# backbeat apps
+-e git+git://github.com/dmeehan/django-backbeat-images.git#egg=django-backbeat-images
+-e git+git://github.com/dmeehan/django-backbeat-blocks.git#egg=django-backbeat-blocks
