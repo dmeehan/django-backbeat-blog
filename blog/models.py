@@ -1,46 +1,39 @@
-# blog/models.py  
+# blog/models.py
+
+import datetime
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import permalink
+from django.utils.html import strip_tags
+
+from blocks.models import ArticleBase
 
 from taggit.managers import TaggableManager
-import categories
-
-from blocks.models import LinkBase, ArticleBase
-from images.models import RelatedImageAutoBase
-
-class Link(LinkBase):
-    """
-        A link entry for the blog
-    """
-    # taxonomy
-    tags = TaggableManager(blank=True)
-    categories = models.ManyToManyField('categories.Category')
-
 
 class Entry(ArticleBase):
     """
         An article entry for the blog
     """
     enable_comments = models.BooleanField(default=True)
-    links = models.ManyToManyField(Link)
 
     # taxonomy
     tags = TaggableManager(blank=True)
-    categories = models.ManyToManyField('categories.Category')
+    categories = models.ManyToManyField(Category, blank=True)
 
+    @permalink
+    def get_absolute_url(self):
+        return ('blog_entry_detail', None, {
+            'year': self.date_published.year,
+            'month': self.date_published.strftime('%b').lower(),
+            'day': self.date_published.day,
+            'slug': self.slug
+        })
 
-class EntryImage(RelatedImageAutoBase):
+class EntryImage(models.Model):
     """
-        Images for a blog entry.
+        An image associated with a blog entry
     """
+    image = models.ImageField()
     entry = models.ForeignKey(Entry)
-
-
-
-class LinkImage(RelatedImageAutoBase):
-    """
-        Images for a link.
-    """
-    link = models.ForeignKey(Link)
