@@ -14,7 +14,7 @@ except (IOError, OSError):
 
 setup(
     name='django-backbeat-blog',
-    version=images.get_version(),
+    version=blog.get_version(),
     description='A pluggable blog app.',
     long_description=long_description,
     author='Douglas Meehan',
