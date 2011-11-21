@@ -18,7 +18,7 @@ setup(
     description='A pluggable blogging app',
     long_description=long_description,
     author='Douglas Meehan',
-    author_email='dmeehan@gmail.com',
+    author_email='coreyoordt@gmail.com',
     include_package_data=True,
     url='http://github.com/dmeehan/django-backbeat-blog',
     packages=find_packages(),
