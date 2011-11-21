@@ -1,19 +1,27 @@
 # blog/views.py
 
-from django.views.generic import DateDetailView, ArchiveIndexView, YearArchiveView, \
-    MonthArchiveView, WeekArchiveView, DayArchiveView, TodayArchiveView, \
-    DetailView, ListView
+from django.conf import settings
+from django.db.models import F
+from django.views.generic import DateDetailView, ArchiveIndexView
 
-from blog.models import *
+from blog.models import Post
 
-class EntryDateMixin():
-    queryset = Entry._default_manager.live()
+class PostDetailView(DateDetailView):
+    queryset = Post._default_manager.live()
+    context_object_name = "post"
     date_field="date_published"
 
-class EntryDetailView(DateDetailView):
-    queryset = Entry._default_manager.live()
-    date_field="date_published"
+    def get_object(self):
+        # Call the superclass
+        object = super(PostDetailView, self).get_object()
+        # Record this visit
+        if not request.META.get('REMOTE_ADDR') in settings.INTERNAL_IPS:
+            object.visits = F('visits') + 1
+            object.save()
+        # Return the object
+        return object
 
-class EntryIndexView(ArchiveIndexView):
-    queryset = Entry._default_manager.live()
+class PostIndexView(ArchiveIndexView):
+    queryset = Post._default_manager.live()
+    context_object_name="post_list"
 

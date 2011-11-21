@@ -2,6 +2,6 @@
 
 from django.contrib import admin
 
-from blog.models import Entry
+from blog.models import Post
 
-admin.site.register(Entry)
+admin.site.register(Post)

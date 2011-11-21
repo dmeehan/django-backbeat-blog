@@ -1,54 +1,35 @@
 # blog/urls.py
 
-from django.conf import settings
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import include, patterns, url
+from django.views.generic import YearArchiveView, MonthArchiveView,\
+    WeekArchiveView, DayArchiveView, TodayArchiveView, \
+    DetailView, ListView
 
-from blog.models import Entry
+from blog.models import Post
+from blog.views import PostIndexView, PostDetailView
 
 urlpatterns = patterns('',
-    url(r'^$', EntryIndexView.as_view(), name = 'blog_entry_index'),
+    url(r'^$', PostIndexView.as_view(), name = 'blog_post_index'),
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
-        DateDetailView.as_view(),
-        queryset=Entry._default_manager.live(),
-        date_field="date_published",
-        name = 'blog_entry_detail'),
+        PostDetailView.as_view(),
+        name = 'blog_post_detail'),
 
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/$',
         DayArchiveView.as_view(),
-        queryset=Entry._default_manager.live(),
+        queryset=Post._default_manager.live(),
         date_field="date_published",
         name='blog_archive_day'
     ),
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/$',
         MonthArchiveView.as_view(),
-        queryset=Entry._default_manager.live(),
+        queryset=Post._default_manager.live(),
         date_field="date_published",
         name='blog_archive_month'
     ),
     url(r'^(?P<year>\d{4})/$',
         YearArchiveView.as_view(),
-        queryset=Entry._default_manager.live(),
+        queryset=Post._default_manager.live(),
         date_field="date_published",
         name='blog_archive_year'
-    ),
-    url(r'^categories/(?P<slug>[-\w]+)/$',
-        view='category_detail',
-        name='blog_category_detail'
-    ),
-    url (r'^categories/$',
-        view='category_list',
-        name='blog_category_list'
-    ),
-    url(r'^tags/(?P<slug>[-\w]+)/$',
-        view='tag_detail',
-        name='blog_tag_detail'
-    ),
-    url(r'^page/(?P<page>\d+)/$',
-        view='post_list',
-        name='blog_index_paginated'
-    ),
-    url(r'^$',
-        view='post_list',
-        name='blog_index'
     ),
 )

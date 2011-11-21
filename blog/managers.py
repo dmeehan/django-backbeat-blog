@@ -3,13 +3,14 @@
 from django.db import models
 from django.db.models.query import QuerySet
 
-class EntryMixin(object):
+class PostMixin(object):
     def live(self):
-        return self.get_query_set().filter(status=self.model.STATUS_LIVE)
+        return self.get_query_set().filter(status=self.model.STATUS_LIVE,
+                                           date_published__lte=datetime.datetime.now())
 
-class EntryQuerySet(QuerySet, EntryMixin):
+class PostQuerySet(QuerySet, PostMixin):
     pass
 
-class EntryManager(models.Manager, ProjectMixin):
+class PostManager(models.Manager, PostMixin):
     def get_query_set(self):
-        return EntryQuerySet(self.model, using=self._db)
+        return PostQuerySet(self.model, using=self._db)
