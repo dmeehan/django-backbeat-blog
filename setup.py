@@ -3,7 +3,7 @@ import blog
 import os
 
 try:
-    long_description = open('README.rst').read()
+    long_description = open('README.txt').read()
 except IOError:
     long_description = ''
 
