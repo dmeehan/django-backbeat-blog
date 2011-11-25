@@ -18,13 +18,14 @@ setup(
     description='A pluggable blogging app',
     long_description=long_description,
     author='Douglas Meehan',
-    author_email='coreyoordt@gmail.com',
+    author_email='dmeehan@gmail.com',
     include_package_data=True,
-    url='http://github.com/dmeehan/django-backbeat-blog',
+    url='http://github.com/dmeehan/django-backbeat-blog/tree/master',
     packages=find_packages(),
     classifiers=[
         'Framework :: Django',
     ],
     install_requires = reqs,
-    dependency_links = []
+    dependency_links = [],
+    zip_safe=False,
 )
