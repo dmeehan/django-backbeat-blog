@@ -11,13 +11,13 @@ class PostDetailView(DateDetailView):
     context_object_name = "post"
     date_field="date_published"
 
-    def get_object(self, request):
+    def get_object(self):
         # Call the superclass
         object = super(PostDetailView, self).get_object()
         # Record this visit
-        if not request.META.get('REMOTE_ADDR') in settings.INTERNAL_IPS:
-            object.visits = F('visits') + 1
-            object.save()
+        #if not request.META.get('REMOTE_ADDR') in settings.INTERNAL_IPS:
+        object.visits = F('visits') + 1
+        object.save()
         # Return the object
         return object
 
