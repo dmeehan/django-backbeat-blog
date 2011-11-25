@@ -24,4 +24,5 @@ class PostDetailView(DateDetailView):
 class PostIndexView(ArchiveIndexView):
     queryset = Post._default_manager.live()
     context_object_name="post_list"
+    date_field="date_published"
 
