@@ -11,7 +11,7 @@ class PostDetailView(DateDetailView):
     context_object_name = "post"
     date_field="date_published"
 
-    def get_object(self):
+    def get_object(self, request):
         # Call the superclass
         object = super(PostDetailView, self).get_object()
         # Record this visit
