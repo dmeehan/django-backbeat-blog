@@ -5,6 +5,9 @@
 #
 #     pip install -r requirements.txt
 
+markdown
+textile
+
 # django apps
 django==1.3.1
 django-taggit==0.9.3
