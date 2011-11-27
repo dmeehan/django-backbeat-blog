@@ -137,10 +137,3 @@ class Post(ArticleBase):
             'day': self.date_published.day,
             'slug': self.slug
         })
-
-class PostImage(models.Model):
-    """
-        An image associated with a blog post
-    """
-    image = models.ImageField(upload_to='images/blog')
-    post = models.ForeignKey(Post)
