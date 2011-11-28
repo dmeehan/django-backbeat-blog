@@ -15,9 +15,9 @@ class PostDetailView(DateDetailView):
         # Call the superclass
         object = super(PostDetailView, self).get_object()
         # Record this visit
-        #if not request.META.get('REMOTE_ADDR') in settings.INTERNAL_IPS:
-        object.visits = F('visits') + 1
-        object.save()
+        if not self.request.META.get('REMOTE_ADDR') in settings.INTERNAL_IPS:
+            object.visits = F('visits') + 1
+            object.save()
         # Return the object
         return object
 
