@@ -100,8 +100,10 @@ class ArticleBase(TextBlockBase, PostMixin, StatusMixin):
         attributes of TextBlockBase, PostMixin, and StatusMixin.
 
     """
+
     slug = models.SlugField(unique_for_date='date_published')
-    
+
+
     class Meta:
         abstract = True
 
@@ -113,6 +115,7 @@ class Post(ArticleBase):
     """
     objects = PostManager()
 
+    link = models.URLField(blank=True)
     enable_comments = models.BooleanField(default=True)
     visits = models.IntegerField(default=0, editable=False) #to keep track of most popular posts
 
