@@ -101,7 +101,7 @@ class Post(models.Model):
 
 class PostImage(models.Model):
 
-    image = models.ImageField(upload_to=_upload_path_wrapper,)
+    image = models.ImageField(upload_to='images/post')
     title = models.CharField(max_length=255)
     caption = models.TextField(null=True, blank=True)
     public = models.BooleanField(default=True, help_text="This file is publicly available.")
