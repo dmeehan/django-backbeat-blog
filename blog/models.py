@@ -63,21 +63,21 @@ class Post(models.Model):
 
 
     class Meta:
-        ordering = ['-date_published']
-        get_latest_by = 'date_published'
+        ordering = ['-published']
+        get_latest_by = 'published'
 
     def get_previous_post(self):
-        return self.get_previous_by_date_published(status=self.STATUS_LIVE)
+        return self.get_previous_by_published(status=self.STATUS_LIVE)
 
     def get_next_post(self):
-        return self.get_next_by_date_published(status=self.STATUS_LIVE)
+        return self.get_next_by_published(status=self.STATUS_LIVE)
 
     @permalink
     def get_absolute_url(self):
         return ('blog_post_detail', None, {
-            'year': self.date_published.year,
-            'month': self.date_published.strftime('%b').lower(),
-            'day': self.date_published.day,
+            'year': self.published.year,
+            'month': self.published.strftime('%b').lower(),
+            'day': self.published.day,
             'slug': self.slug
         })
 
