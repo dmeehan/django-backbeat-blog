@@ -7,9 +7,9 @@ from django.views.generic import DateDetailView, ArchiveIndexView
 from blog.models import Post
 
 class PostDetailView(DateDetailView):
-    queryset = Post._default_manager.live()
+    queryset = Post.objects.live()
     context_object_name = "post"
-    date_field="date_published"
+    date_field="published"
 
     def get_object(self):
         # Call the superclass
