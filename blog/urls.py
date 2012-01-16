@@ -16,20 +16,20 @@ urlpatterns = patterns('',
 
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/$',
         DayArchiveView.as_view(
-        queryset=Post._default_manager.live(),
-        date_field="date_published"),
+        queryset=Post.objects.live(),
+        date_field="published"),
         name='blog_archive_day'
     ),
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/$',
         MonthArchiveView.as_view(
-        queryset=Post._default_manager.live(),
-        date_field="date_published"),
+        queryset=Post.objects.live(),
+        date_field="published"),
         name='blog_archive_month'
     ),
     url(r'^(?P<year>\d{4})/$',
         YearArchiveView.as_view(
-        queryset=Post._default_manager.live(),
-        date_field="date_published"),
+        queryset=Post.objects.live(),
+        date_field="published"),
         name='blog_archive_year'
     ),
 )
