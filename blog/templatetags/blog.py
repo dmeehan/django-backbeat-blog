@@ -108,7 +108,7 @@ class PostArchive(template.Node):
         self.var_name = var_name
 
     def render(self, context):
-        dates = Post._default_manager.live().dates('date_published', 'month', order='DESC')
+        dates = Post._default_manager.live().dates('published', 'month', order='DESC')
         if dates:
             context[self.var_name] = dates
         return ''
@@ -130,7 +130,7 @@ class PostArchive(template.Node):
         self.var_name = var_name
 
     def render(self, context):
-        dates = Post._default_manager.live().dates('date_published', 'month', order='DESC')
+        dates = Post._default_manager.live().dates('published', 'month', order='DESC')
         if dates:
             context[self.var_name] = dates
         return ''
