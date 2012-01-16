@@ -95,6 +95,10 @@ class Post(models.Model):
     def __unicode__(self):
         return u'%s' % self.title
 
+    # the following method is optional
+    def get_twitter_message(self):
+        return u'%s - %s' % (self.title, self.excerpt)
+
 class PostImage(models.Model):
 
     image = models.ImageField(upload_to=_upload_path_wrapper,)
@@ -128,4 +132,3 @@ class PostImage(models.Model):
                 self.order = 0
 
         super(PostImage, self).save(*args, **kwargs)
-
