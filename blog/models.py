@@ -92,7 +92,7 @@ class Post(models.Model):
 
     def save(self, force_insert=False, force_update=False):
         self.render_markup()
-        super(TextBlockBase, self).save(force_insert, force_update)
+        super(Post, self).save(force_insert, force_update)
 
     def __unicode__(self):
         return u'%s' % self.title
