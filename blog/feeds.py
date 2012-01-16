@@ -5,7 +5,7 @@ from django.contrib.syndication.feeds import Feed
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.models import Comment
 from django.core.urlresolvers import reverse
-from basic.blog.models import Post
+from blog.models import Post
 
 
 class BlogPostsFeed(Feed):
@@ -17,7 +17,7 @@ class BlogPostsFeed(Feed):
         return reverse('blog_index')
 
     def items(self):
-        return Post.objects.published()[:10]
+        return Post.objects.live()[:10]
 
     def item_pubdate(self, obj):
-        return obj.publish
+        return obj.published
