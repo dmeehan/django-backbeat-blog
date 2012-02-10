@@ -15,7 +15,7 @@ class LatestPosts(template.Node):
         self.var_name = var_name
 
     def render(self, context):
-        posts = Post._default_manager.live()[:self.limit]
+        posts = Post.objects.live()[:self.limit]
         if posts and (self.limit == 1):
             context[self.var_name] = posts[0]
         else:
