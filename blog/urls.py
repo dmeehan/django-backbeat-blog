@@ -10,7 +10,7 @@ from blog.views import PostIndexView, PostDetailView
 
 urlpatterns = patterns('',
     url(r'^$', PostIndexView.as_view(), name = 'blog_post_index'),
-    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
+    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$',
         PostDetailView.as_view(),
         name = 'blog_post_detail'),
 
