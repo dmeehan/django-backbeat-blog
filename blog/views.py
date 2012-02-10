@@ -22,7 +22,7 @@ class PostDetailView(DateDetailView):
         return object
 
 class PostIndexView(ArchiveIndexView):
-    queryset = Post._default_manager.live()
+    queryset = Post.objects.live()
     context_object_name="post_list"
     date_field="published"
 
